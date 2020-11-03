@@ -1,0 +1,10 @@
+name: M2-environment
+channels: 
+    - conda-forge
+dependencies: 
+    - matplotlib
+    - numpy
+    - scipy
+    - obspy
+    - ipympl
+    - cartopy
