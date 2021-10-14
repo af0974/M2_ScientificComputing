@@ -40,7 +40,7 @@ def mollweide_plot(SVZ, nlat, nlon, colat, longi, Title=None, obs_coords=None, c
     if Title is not None:
         ax.set_title(Title)
 #   
-    plt.tight_layout()
+    #plt.tight_layout()
     plt.savefig('SVtest.png')
     plt.savefig('SVtest.pdf')
     plt.show()
