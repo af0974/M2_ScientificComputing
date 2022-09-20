@@ -11,3 +11,5 @@ dependencies:
   - python-wget==3.2
   - shapely
   - Cartopy==0.18.0
+  - pip:
+      - jupyterlab_latex
