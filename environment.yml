@@ -1,0 +1,13 @@
+dependencies:
+  - matplotlib==3.5.3
+  - matplotlib-inline==0.1.6
+  - ipympl==0.9.2
+  - networkx=2.4
+  - numpy==1.18.1
+  - pandas==1.0.1
+  - scipy==1.4.1
+  - tqdm==4.46.0
+  - watermark==2.0.2
+  - python-wget==3.2
+  - shapely
+  - Cartopy==0.18.0
