@@ -20,7 +20,7 @@ ra  : number
 
 import numpy as np
 
-# Maximum SH degree of expension
+# Maximum SH degree of expansion
 ll = 8 
 # Reference radius
 # ra = 6371.2 # mean radius of Earth in km
