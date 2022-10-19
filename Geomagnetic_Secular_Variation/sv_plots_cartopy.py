@@ -89,7 +89,7 @@ def mollweide_plot_3(SVX, SVY, SVZ, nlat, nlon, colat, longi):
     plt.savefig('SVtest_3comp.pdf')
     plt.show()
 
-def plot_residuals(resid, nbins, Title=None, show=False, outfile_name=None):
+def plot_residuals(resid, nbins, Title=None, show=True, outfile_name=None):
 #   nbins is the number of bins used to represent the histogram
 
     fig = plt.figure()
@@ -107,7 +107,6 @@ def plot_residuals(resid, nbins, Title=None, show=False, outfile_name=None):
         plt.savefig(outfile_name+'.pdf')
     if show is True:
         plt.show()
-    plt.close()
 
 def plot_spectrum(matD,ll,mygh):
 
