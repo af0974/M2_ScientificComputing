@@ -3,11 +3,12 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import cartopy.crs as ccrs
 import cartopy.util as cutil
+from matplotlib.ticker import MultipleLocator, AutoMinorLocator
 
 def init_conf_plt(): 
 
-    plt.rc('legend', fontsize=20)
-    plt.rc('axes', labelsize=20,facecolor='None')
+    plt.rc('legend', fontsize=16)
+    plt.rc('axes', labelsize=16,facecolor='None')
     plt.rc('savefig', facecolor='None', edgecolor='None')
 
 def hammer_plot(SVZ, nlat, nlon, colat, longi, Title=None, obs_coords=None, central_long=None, filename=None, debug=False, unit=None):
@@ -114,11 +115,10 @@ def plot_residuals(resid, nbins=20, Title=None, show=True, outfile_name=None, un
     if show is True:
         plt.show()
 
-def plot_spectrum(matD,ll,mygh):
+def plot_spectrum(matD,ll,mygh, show=True, outfile_name=None):
 
     init_conf_plt()
     mynorm = np.zeros(ll+1)
-    
     lm = -1 
     for il in range(1,ll+1):
         for im in range (0,il): 
@@ -131,22 +131,27 @@ def plot_spectrum(matD,ll,mygh):
                 lm = lm + 1 
                 mynorm[il] = mynorm[il] + matD[lm,lm] * mygh[lm]**2
  
-    fig = plt.figure(figsize=(10,10))
+    fig = plt.figure()
     fig.subplots_adjust(top=0.98,left=0.08,right=0.9)
     ax1 = fig.add_subplot(111)
     lrange = range(0,ll+1)
     print(np.shape(lrange))
     print(np.shape(mynorm))
-    ax1.semilogy(lrange, mynorm)
+    ax1.semilogy(lrange, mynorm, linestyle="-", marker="o", color='b')
     ax1.set_xlabel(r'spherical harmonic degree $\ell$')
     ax1.set_ylabel(r'squared mynorm (nT/yr)^2')
-    font_size = 20
-    plt.savefig('spectrum.pdf')
-#   plt.show()
+    ax1.xaxis.set_major_locator(MultipleLocator(1))  # Graduation majeure tous les 1 degré
+    ax1.grid(which='both')
+    ax1.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
+    if outfile_name is not None:
+        plt.savefig(outfile_name+'.pdf')
+        plt.savefig(outfile_name+'.png')
+    if show is True:
+        plt.show()
 
 def compute_spectrum(matD,ll,mygh):
+#
     mynorm = np.zeros(ll+1)
-
     lm = -1 
     for il in range(1,ll+1):
         for im in range (0,il): 
@@ -159,3 +164,11 @@ def compute_spectrum(matD,ll,mygh):
                 lm = lm + 1 
                 mynorm[il] = mynorm[il] + matD[lm,lm] * mygh[lm]**2
     return mynorm
+
+if __name__ == "__main__":
+    # Exemple d'utilisation
+    ll = 9  # Exemple de limite supérieure
+    ngh = ll * (ll + 2)  # Nombre de coefficients de Gauss
+    matD = np.random.rand(ngh, ngh)  # Exemple de matrice D
+    mygh = np.random.rand(ngh)  # Exemple de coefficients de Gauss
+    plot_spectrum(matD, ll, mygh, show=True, outfile_name=None)
